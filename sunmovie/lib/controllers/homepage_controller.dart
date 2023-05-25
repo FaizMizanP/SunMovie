@@ -1,7 +1,61 @@
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sunmovie/models/homepage_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
+class TrendingController extends StatefulWidget {
+  const TrendingController({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _TrendingControllerState createState() => _TrendingControllerState();
+}
+
+class _TrendingControllerState extends State<TrendingController> {
+  List<TrendingModel> trendingMovies = [];
+
+  @override
+  void initState(){
+    super.initState();
+    fetchTrendingMovies();
+  }
+
+  Future<void> fetchTrendingMovies() async {
+    final response = await http.get(Uri.parse('https://api.themoviedb.org/3/trending/movie/day?api_key=2b106eac51c7ebba580862759524ba9f'));
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      List<TrendingModel> movies = [];
+      for (var movie in jsonData['results']) {
+        movies.add(TrendingModel(posterPath: movie['backdrop_path']));
+      }
+      setState(() {
+        trendingMovies = movies;
+      });
+    }else{
+      throw Exception('Failed to fetch trending movies');
+    }
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider.builder(
+      itemCount: trendingMovies.length,
+      itemBuilder: (BuildContext context, int index, int realIndex){
+        return Image.network(
+          'https://image.tmdb.org/t/p/w500/${trendingMovies[index].posterPath}',
+          fit: BoxFit.cover,
+        );
+      },
+      options: CarouselOptions(
+        aspectRatio: 16 / 9,
+        enlargeCenterPage: true,
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
+}
 
 class MovieController {
   final String _apiKey = "2b106eac51c7ebba580862759524ba9f";

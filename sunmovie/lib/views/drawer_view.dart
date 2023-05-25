@@ -58,36 +58,133 @@ Widget CreateDrawerList() {
 
 Widget menuItem() {
   return Material(
-    child: InkWell(
-      onTap: () {},
-      child: const Padding(
-        padding: EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            Row(
+    child: Column(
+      children: [
+        InkWell(
+          onTap: () {},
+          child: const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Column(
               children: [
-                Expanded(
-                  child: Icon(
-                    Icons.home_outlined,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    "Home",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Icon(
+                        Icons.login_outlined,
+                        size: 22,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                )
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
+        InkWell(
+          onTap: () {},
+          child: const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Icon(
+                        Icons.home_outlined,
+                        size: 22,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        "Home",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {},
+          child: const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Icon(
+                        Icons.movie_outlined,
+                        size: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        "Movies",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {},
+          child: const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Icon(
+                        Icons.tv_outlined,
+                        size: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        "TV Shows",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }

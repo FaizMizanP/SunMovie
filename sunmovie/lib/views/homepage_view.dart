@@ -40,71 +40,11 @@ class view_homepage extends StatelessWidget {
       ),
       body: ListView(
         scrollDirection: Axis.vertical,
-        children: [
+        children: const [
           Column(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'lib/assets/images/Fakta-Game-The-Last-of-Us-yang-Diadaptasi-jadi-Serial-HBO.jpeg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                height: 200,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 50,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_circle_left_outlined,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {}, //isi entar
-                      ),
-                    ),
-                    Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "The Last of Us",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Text(
-                          'When youre lost in the darkness, look for the light.',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(elevation: 2),
-                          onPressed: () {}, //isi entar
-                          child: const Text('Detail'),
-                        )
-                      ],
-                    )),
-                    SizedBox(
-                      width: 50,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_circle_right_outlined,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
+              TrendingController(),
+              SizedBox(
                   height: 40,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -127,10 +67,10 @@ class view_homepage extends StatelessWidget {
                       )
                     ],
                   )),
-              const SizedBox(
+              SizedBox(
                 child: Top10MoviesScreen(),
               ),
-              const SizedBox(
+              SizedBox(
                   height: 40,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -153,7 +93,7 @@ class view_homepage extends StatelessWidget {
                       )
                     ],
                   )),
-              const SizedBox(
+              SizedBox(
                 child: Top10TvScreen(),
               ),
             ],
