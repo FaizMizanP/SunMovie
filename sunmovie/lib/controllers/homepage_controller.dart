@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sunmovie/models/homepage_model.dart';
 import 'dart:convert';
@@ -17,13 +16,14 @@ class _TrendingControllerState extends State<TrendingController> {
   List<TrendingModel> trendingMovies = [];
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     fetchTrendingMovies();
   }
 
   Future<void> fetchTrendingMovies() async {
-    final response = await http.get(Uri.parse('https://api.themoviedb.org/3/trending/movie/day?api_key=2b106eac51c7ebba580862759524ba9f'));
+    final response = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/trending/movie/day?api_key=2b106eac51c7ebba580862759524ba9f'));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       List<TrendingModel> movies = [];
@@ -33,25 +33,31 @@ class _TrendingControllerState extends State<TrendingController> {
       setState(() {
         trendingMovies = movies;
       });
-    }else{
+    } else {
       throw Exception('Failed to fetch trending movies');
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return CarouselSlider.builder(
       itemCount: trendingMovies.length,
-      itemBuilder: (BuildContext context, int index, int realIndex){
-        return Image.network(
-          'https://image.tmdb.org/t/p/w500/${trendingMovies[index].posterPath}',
-          fit: BoxFit.cover,
+      itemBuilder: (BuildContext context, int index, int realIndex) {
+        return SizedBox(
+          width: screenWidth,
+          child: Image.network(
+            'https://image.tmdb.org/t/p/w500/${trendingMovies[index].posterPath}',
+            fit: BoxFit.cover,
+          ),
         );
       },
       options: CarouselOptions(
-        aspectRatio: 16 / 9,
-        enlargeCenterPage: true,
+        enlargeCenterPage: false,
         scrollDirection: Axis.horizontal,
+        viewportFraction: 1.0,
+        autoPlay: true,
       ),
     );
   }
@@ -120,7 +126,11 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
                   final movie = snapshot.data![index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Card(
+                    child: InkWell(
+                      onTap: () {
+                        // Aksi yang akan dilakukan ketika card ditekan
+                        // Misalnya, menampilkan detail film atau melakukan navigasi ke halaman detail
+                      },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -240,7 +250,11 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
                   final tvShow = snapshot.data![index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Card(
+                    child: InkWell(
+                      onTap: () {
+                        // Aksi yang akan dilakukan ketika card ditekan
+                        // Misalnya, menampilkan detail TV show atau melakukan navigasi ke halaman detail
+                      },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
