@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:sunmovie/views/tv_detail_view.dart';
 import 'package:sunmovie/models/film_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -254,6 +255,12 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
                       onTap: () {
                         // Aksi yang akan dilakukan ketika card ditekan
                         // Misalnya, menampilkan detail TV show atau melakukan navigasi ke halaman detail
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => tv_detail(tvshow: tvShow),
+                          ),
+                        );
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,8 +305,8 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
             ),
           );
         } else if (snapshot.hasError) {
-          return const Center(
-            child: Text("Failed to load top 10 TV shows"),
+          return Center(
+            child: Text("Failed to load top 10 TV shows: ${snapshot.error}"),
           );
         } else {
           return const Center(
