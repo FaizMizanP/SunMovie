@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:sunmovie/models/film_model.dart';
 
 // ignore: camel_case_types
-class tv_detail extends StatelessWidget {
-  final TVModel tvshow;
+class movie_detail extends StatelessWidget {
+  final MovieModel movie;
 
-  const tv_detail({Key? key, required this.tvshow}) : super(key: key);
+  const movie_detail({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(tvshow.name),
+        title: Text(movie.title),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -23,7 +23,7 @@ class tv_detail extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(tvshow.posterUrl),
+            image: NetworkImage(movie.posterUrl),
             fit: BoxFit.fill,
           ),
         ),
@@ -38,14 +38,14 @@ class tv_detail extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  tvshow.overview,
+                  movie.overview,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  "Release Date : ${tvshow.releaseDate}",
+                  "Release Date : ${movie.releaseDate}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,

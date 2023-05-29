@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:sunmovie/views/movie_detail_view.dart';
 import 'package:sunmovie/views/tv_detail_view.dart';
 import 'package:sunmovie/models/film_model.dart';
 import 'dart:convert';
@@ -131,6 +132,12 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
                       onTap: () {
                         // Aksi yang akan dilakukan ketika card ditekan
                         // Misalnya, menampilkan detail film atau melakukan navigasi ke halaman detail
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => movie_detail(movie: movie),
+                          ),
+                        );
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
