@@ -28,7 +28,7 @@ class movie_detail extends StatelessWidget {
           ),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
           child: Padding(
             padding: const EdgeInsets.only(
               left: 60.0,

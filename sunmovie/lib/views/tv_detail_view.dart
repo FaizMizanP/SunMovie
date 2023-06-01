@@ -14,7 +14,12 @@ class tv_detail extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(tvshow.name),
+        title: Text(
+          tvshow.name,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -28,7 +33,7 @@ class tv_detail extends StatelessWidget {
           ),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
           child: Padding(
             padding: const EdgeInsets.only(
               left: 60.0,
@@ -37,18 +42,26 @@ class tv_detail extends StatelessWidget {
             ),
             child: Column(
               children: [
+                Center(
+                  child:
+                      Image.asset('lib/assets/images/logo_2.png', height: 300),
+                ),
                 Text(
                   tvshow.overview,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  "Release Date : ${tvshow.releaseDate}",
+                  tvshow.releaseDate.substring(0, 4),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
                   ),
                 )
               ],

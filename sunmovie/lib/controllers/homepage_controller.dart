@@ -167,7 +167,7 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
                               bottom: 8.0,
                             ),
                             child: Text(
-                              movie.releaseDate,
+                              movie.releaseDate.substring(0, 4),
                               style: const TextStyle(
                                 color: Colors.grey,
                               ),
@@ -297,7 +297,7 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
                               bottom: 8.0,
                             ),
                             child: Text(
-                              tvShow.releaseDate,
+                              tvShow.releaseDate.substring(0, 4),
                               style: const TextStyle(
                                 color: Colors.grey,
                               ),
