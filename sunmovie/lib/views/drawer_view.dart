@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:sunmovie/views/homepage_view.dart';
 
 class CreateHeaderDrawer extends StatefulWidget {
   const CreateHeaderDrawer({super.key});
@@ -45,18 +46,18 @@ class _CreateHeaderDrawerState extends State<CreateHeaderDrawer> {
 }
 
 // ignore: non_constant_identifier_names
-Widget CreateDrawerList() {
+Widget CreateDrawerList(BuildContext context) {
   return Container(
     padding: const EdgeInsets.only(
       top: 15.0,
     ),
     child: Column(
-      children: [menuItem()],
+      children: [menuItem(context)],
     ),
   );
 }
 
-Widget menuItem() {
+Widget menuItem(BuildContext context) {
   return Material(
     child: Column(
       children: [
@@ -92,7 +93,14 @@ Widget menuItem() {
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const view_homepage(),
+              ),
+            );
+          },
           child: const Padding(
             padding: EdgeInsets.all(15.0),
             child: Column(

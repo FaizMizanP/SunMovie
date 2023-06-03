@@ -5,6 +5,7 @@ class MovieModel {
   final String releaseDate;
   final String overview;
   final int runtime;
+  final double voteAverage;
 
   MovieModel({
     required this.id,
@@ -13,6 +14,7 @@ class MovieModel {
     required this.releaseDate,
     required this.overview,
     required this.runtime,
+    required this.voteAverage,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -27,6 +29,7 @@ class MovieModel {
       releaseDate: json['release_date'],
       overview: json['overview'],
       runtime: runtime,
+      voteAverage: json['vote_average'].toDouble(),
     );
   }
 }
@@ -38,7 +41,7 @@ class TVModel {
   final String releaseDate;
   final String overview;
   final int runtime;
-  //final double voteAverage;
+  final double voteAverage;
   //final int episodeNumber;
 
   TVModel({
@@ -48,7 +51,7 @@ class TVModel {
     required this.releaseDate,
     required this.overview,
     required this.runtime,
-    //required this.voteAverage,
+    required this.voteAverage,
     //required this.episodeNumber,
   });
 
@@ -62,7 +65,7 @@ class TVModel {
       releaseDate: json['first_air_date'],
       overview: json['overview'],
       runtime: runtime,
-      //voteAverage: json['vote_average'],
+      voteAverage: json['vote_average'].toDouble(),
       //episodeNumber: json['number_of_episodes'],
     );
   }

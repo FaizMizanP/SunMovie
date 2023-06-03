@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunmovie/controllers/homepage_controller.dart';
+import 'package:sunmovie/controllers/film_controller_dart.dart';
 import 'package:sunmovie/views/drawer_view.dart';
 import 'package:sunmovie/views/search_view.dart';
 
@@ -13,7 +13,10 @@ class view_homepage extends StatelessWidget {
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Column(
-            children: [const CreateHeaderDrawer(), CreateDrawerList()],
+            children: [
+              const CreateHeaderDrawer(),
+              CreateDrawerList(context),
+            ],
           ),
         ),
       ),
@@ -23,7 +26,17 @@ class view_homepage extends StatelessWidget {
         elevation: 10,
         title: Center(
           child: Expanded(
-            child: Image.asset('lib/assets/images/logo3.jpg', height: 35),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const view_homepage(),
+                  ),
+                );
+              },
+              child: Image.asset('lib/assets/images/logo3.jpg', height: 35),
+            ),
           ),
         ),
         actions: [
@@ -57,7 +70,7 @@ class view_homepage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'Top 10 Movies',
+                            'Top 10 Trending Movies',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -83,7 +96,7 @@ class view_homepage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'Top 10 TV Shows',
+                            'Top 10 Trending TV Shows',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

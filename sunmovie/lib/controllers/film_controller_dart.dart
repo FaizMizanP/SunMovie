@@ -25,7 +25,7 @@ class _TrendingControllerState extends State<TrendingController> {
 
   Future<void> fetchTrendingMovies() async {
     final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/trending/movie/day?api_key=2b106eac51c7ebba580862759524ba9f'));
+        'https://api.themoviedb.org/3/trending/all/day?api_key=2b106eac51c7ebba580862759524ba9f'));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       List<TrendingModel> movies = [];
@@ -70,7 +70,7 @@ class MovieController {
 
   Future<List<MovieModel>> getTop10Movies() async {
     final url =
-        "https://api.themoviedb.org/3/movie/popular?api_key=$_apiKey&page=1";
+        "https://api.themoviedb.org/3/trending/movie/day?api_key=$_apiKey&page=1";
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -171,6 +171,27 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
                               style: const TextStyle(
                                 color: Colors.grey,
                               ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                              right: 8.0,
+                              bottom: 8.0,
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.thumb_up,
+                                  color: Colors.blue,
+                                ),
+                                Text(
+                                  movie.voteAverage.toString().substring(0, 3),
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -301,6 +322,27 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
                               style: const TextStyle(
                                 color: Colors.grey,
                               ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                              right: 8.0,
+                              bottom: 8.0,
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.thumb_up,
+                                  color: Colors.blue,
+                                ),
+                                Text(
+                                  tvShow.voteAverage.toString().substring(0, 3),
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

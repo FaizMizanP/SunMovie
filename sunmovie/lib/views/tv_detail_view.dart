@@ -17,7 +17,17 @@ class tv_detail extends StatelessWidget {
         title: Text(
           tvshow.name,
           style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Colors.black.withOpacity(0.5),
+                blurRadius: 2,
+                offset: const Offset(1, 1),
+              )
+            ],
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -43,26 +53,88 @@ class tv_detail extends StatelessWidget {
             child: Column(
               children: [
                 Center(
-                  child:
-                      Image.asset('lib/assets/images/logo_2.png', height: 300),
+                  child: Image.asset('lib/assets/images/logo utama.png',
+                      height: 200),
                 ),
                 Text(
                   tvshow.overview,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 2,
+                        offset: const Offset(1, 1),
+                      )
+                    ],
                   ),
                 ),
-                Text(
-                  tvshow.releaseDate.substring(0, 4),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(blurRadius: 5.0),
+                            ],
+                            border: Border.all(
+                              color: Colors.white,
+                              style: BorderStyle.solid,
+                              width: 6,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              tvshow.releaseDate.substring(0, 4),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(blurRadius: 5.0),
+                            ],
+                            border: Border.all(
+                              color: Colors.white,
+                              style: BorderStyle.solid,
+                              width: 6,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              tvshow.voteAverage.toString().substring(0, 3),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
