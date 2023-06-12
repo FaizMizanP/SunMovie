@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:sunmovie/models/movie_model.dart';
+import 'package:sunmovie/models/trending_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:sunmovie/models/tv_model.dart';
 import 'package:sunmovie/views/movie_detail_view.dart';
 import 'package:sunmovie/views/tv_detail_view.dart';
-import 'package:sunmovie/models/film_model.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 
 class TrendingController extends StatefulWidget {
   const TrendingController({super.key});
@@ -65,7 +67,7 @@ class _TrendingControllerState extends State<TrendingController> {
   }
 }
 
-class MovieController {
+class TrendingMovieController {
   final String _apiKey = "2b106eac51c7ebba580862759524ba9f";
 
   Future<List<MovieModel>> getTop10Movies() async {
@@ -103,7 +105,7 @@ class Top10MoviesScreen extends StatefulWidget {
 }
 
 class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
-  final MovieController _movieController = MovieController();
+  final TrendingMovieController _movieController = TrendingMovieController();
 
   late Future<List<MovieModel>> _movies;
 
@@ -142,11 +144,15 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            movie.posterUrl,
-                            width: 200,
-                            height: 300,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
+                            child: Image.network(
+                              movie.posterUrl,
+                              width: 200,
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -185,6 +191,7 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
                                   Icons.thumb_up,
                                   color: Colors.blue,
                                 ),
+                                SizedBox.fromSize(size: const Size(5, 5)),
                                 Text(
                                   movie.voteAverage.toString().substring(0, 3),
                                   style: const TextStyle(
@@ -216,12 +223,12 @@ class _Top10MoviesScreenState extends State<Top10MoviesScreen> {
   }
 }
 
-class TVController {
+class TrendingTVController {
   final String _apiKey = "2b106eac51c7ebba580862759524ba9f";
 
   Future<List<TVModel>> getTop10TV() async {
     final url =
-        "https://api.themoviedb.org/3/tv/popular?api_key=$_apiKey&page=1";
+        "https://api.themoviedb.org/3/trending/tv/day?api_key=$_apiKey&page=1";
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -254,7 +261,7 @@ class Top10TvScreen extends StatefulWidget {
 }
 
 class _Top10TvScreenState extends State<Top10TvScreen> {
-  final TVController _tvController = TVController();
+  final TrendingTVController _tvController = TrendingTVController();
 
   late Future<List<TVModel>> _tvShows;
 
@@ -293,11 +300,15 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            tvShow.posterUrl,
-                            width: 200,
-                            height: 300,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
+                            child: Image.network(
+                              tvShow.posterUrl,
+                              width: 200,
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -336,6 +347,7 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
                                   Icons.thumb_up,
                                   color: Colors.blue,
                                 ),
+                                SizedBox.fromSize(size: const Size(5, 5)),
                                 Text(
                                   tvShow.voteAverage.toString().substring(0, 3),
                                   style: const TextStyle(

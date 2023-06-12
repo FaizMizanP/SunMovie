@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:sunmovie/views/homepage_view.dart';
+import 'package:sunmovie/views/movies_view.dart';
 
 class CreateHeaderDrawer extends StatefulWidget {
   const CreateHeaderDrawer({super.key});
@@ -131,7 +132,14 @@ Widget menuItem(BuildContext context) {
           ),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AllGenresScreen(),
+              ),
+            );
+          },
           child: const Padding(
             padding: EdgeInsets.all(15.0),
             child: Column(

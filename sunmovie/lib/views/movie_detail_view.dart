@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:sunmovie/models/film_model.dart';
+import 'package:sunmovie/models/movie_model.dart';
 
 // ignore: camel_case_types
 class movie_detail extends StatelessWidget {
