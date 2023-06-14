@@ -52,6 +52,12 @@ dependencies:
 
   flutter_screenutil: ^5.8.2
 
+  search_page: ^2.3.0
+
+  cloud_firestore: ^4.8.1
+
+  firebase_core: ^2.14.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

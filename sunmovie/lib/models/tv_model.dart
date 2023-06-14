@@ -6,7 +6,6 @@ class TVModel {
   final String overview;
   final int runtime;
   final double voteAverage;
-  //final int episodeNumber;
 
   TVModel({
     required this.id,
@@ -16,7 +15,6 @@ class TVModel {
     required this.overview,
     required this.runtime,
     required this.voteAverage,
-    //required this.episodeNumber,
   });
 
   factory TVModel.fromJson(Map<String, dynamic> json) {
@@ -30,7 +28,6 @@ class TVModel {
       overview: json['overview'],
       runtime: runtime,
       voteAverage: json['vote_average'].toDouble(),
-      //episodeNumber: json['number_of_episodes'],
     );
   }
 }

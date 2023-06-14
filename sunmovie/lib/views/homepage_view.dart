@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:sunmovie/controllers/trending_controller.dart';
-
 import 'package:sunmovie/views/drawer_view.dart';
-import 'package:sunmovie/views/search_view.dart';
 
 // ignore: camel_case_types
 class view_homepage extends StatelessWidget {
@@ -44,13 +41,8 @@ class view_homepage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(),
-              );
-            },
-          )
+            onPressed: () {},
+          ),
         ],
       ),
       body: ListView(

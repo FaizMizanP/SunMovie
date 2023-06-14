@@ -6,6 +6,7 @@ class MovieModel {
   final String overview;
   final int runtime;
   final double voteAverage;
+  //final String mediaType;
 
   MovieModel({
     required this.id,
@@ -15,6 +16,7 @@ class MovieModel {
     required this.overview,
     required this.runtime,
     required this.voteAverage,
+    //required this.mediaType
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class MovieModel {
       overview: json['overview'],
       runtime: runtime,
       voteAverage: json['vote_average'].toDouble(),
+      //mediaType: json['media_type'],
     );
   }
 }

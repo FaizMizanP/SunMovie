@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 
-import 'package:sunmovie/models/movie_model.dart';
+import 'package:sunmovie/models/tv_model.dart';
 import 'package:sunmovie/models/genre_model.dart';
 
 import 'package:sunmovie/controllers/genre_controller.dart';
-import 'package:sunmovie/controllers/movie_controller.dart';
-import 'package:sunmovie/views/movie_detail_view.dart';
+import 'package:sunmovie/controllers/tv_controller.dart';
+import 'package:sunmovie/views/tv_detail_view.dart';
 
-class DiscoverMovieScreen extends StatefulWidget {
-  const DiscoverMovieScreen({super.key});
+class DiscoverTVScreen extends StatefulWidget {
+  const DiscoverTVScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _DiscoverMovieScreenState createState() => _DiscoverMovieScreenState();
+  _DiscoverTVScreenState createState() => _DiscoverTVScreenState();
 }
 
-class _DiscoverMovieScreenState extends State<DiscoverMovieScreen> {
-  final genreMovieController _genreController = genreMovieController();
-  final MoviesController _movieController = MoviesController();
+class _DiscoverTVScreenState extends State<DiscoverTVScreen> {
+  final genreTVController _genreController = genreTVController();
+  final TVController _tvController = TVController();
   late Future<List<genreModel>> _genres;
-  late Future<List<MovieModel>> _movies;
+  late Future<List<TVModel>> _tvShows;
   int _selectedGenreId = 0;
 
   @override
   void initState() {
     super.initState();
     _genres = _genreController.getAllGenres();
-    _movies = _movieController.getMoviesByGenre(_selectedGenreId);
+    _tvShows = _tvController.getTVShowsByGenre(_selectedGenreId);
   }
 
   void _selectGenre(int genreId) {
     setState(() {
       _selectedGenreId = genreId;
-      _movies = _movieController.getMoviesByGenre(_selectedGenreId);
+      _tvShows = _tvController.getTVShowsByGenre(_selectedGenreId);
     });
   }
 
@@ -40,7 +40,7 @@ class _DiscoverMovieScreenState extends State<DiscoverMovieScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Discover Movie'),
+        title: const Text('Discover TV Shows'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,26 +79,26 @@ class _DiscoverMovieScreenState extends State<DiscoverMovieScreen> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<List<MovieModel>>(
-              future: _movies,
+            child: FutureBuilder<List<TVModel>>(
+              future: _tvShows,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final movies = snapshot.data!;
+                  final tvShows = snapshot.data!;
 
                   return ListView.builder(
-                    itemCount: movies.length,
+                    itemCount: tvShows.length,
                     itemBuilder: (context, index) {
-                      final movie = movies[index];
+                      final tvShow = tvShows[index];
 
                       return ListTile(
-                        leading: Image.network(movie.posterUrl),
-                        title: Text(movie.title),
-                        subtitle: Text(movie.releaseDate.substring(0, 4)),
+                        leading: Image.network(tvShow.posterUrl),
+                        title: Text(tvShow.name),
+                        subtitle: Text(tvShow.releaseDate),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => movie_detail(movie: movie),
+                              builder: (context) => tv_detail(tvshow: tvShow),
                             ),
                           );
                         },
@@ -106,7 +106,7 @@ class _DiscoverMovieScreenState extends State<DiscoverMovieScreen> {
                     },
                   );
                 } else if (snapshot.hasError) {
-                  return const Text("Failed to load movies");
+                  return Text("Failed to load TV shows : ${snapshot.error}");
                 } else {
                   return const Center(
                     child: CircularProgressIndicator(),

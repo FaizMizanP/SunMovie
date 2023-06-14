@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "985257742158",
+    "project_id": "sunmovie-aedde",
+    "storage_bucket": "sunmovie-aedde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985257742158:android:8c756949599accb578d81f",
+        "android_client_info": {
+          "package_name": "com.example.sunmovie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985257742158-a72cdjnavukebrsc4t27f2gi1qredqfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFiLmxtJTTvBCxRYt6_R9XdIqWS-riQCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985257742158-a72cdjnavukebrsc4t27f2gi1qredqfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
