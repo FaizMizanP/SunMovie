@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:sunmovie/views/homepage_view.dart';
+import 'package:sunmovie/views/login_view.dart';
 import 'package:sunmovie/views/movies_view.dart';
 import 'package:sunmovie/views/tvs_view.dart';
 
@@ -64,7 +65,14 @@ Widget menuItem(BuildContext context) {
     child: Column(
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(),
+              ),
+            );
+          },
           child: const Padding(
             padding: EdgeInsets.all(15.0),
             child: Column(
