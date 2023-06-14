@@ -33,9 +33,9 @@ class CustomSearchDelegate extends SearchDelegate<String> {
       future: _performSearch(query),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Failed to load search results'));
+          return const Center(child: Text('Failed to load search results'));
         } else if (snapshot.hasData) {
           final searchResults = snapshot.data!;
           return ListView.builder(
@@ -56,7 +56,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
             },
           );
         } else {
-          return Center(child: Text('No search results found'));
+          return const Center(child: Text('No search results found'));
         }
       },
     );

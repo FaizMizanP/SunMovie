@@ -378,3 +378,155 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
     );
   }
 }
+
+class UpcomingMovieController {
+  Future<List<MovieModel>> getUpcomingMovie() async {
+    final apiKey = '2b106eac51c7ebba580862759524ba9f'; // Ganti dengan API key Anda dari TMDB
+    final url =
+        'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        final moviesData = jsonData['results'] as List<dynamic>;
+
+        final List<MovieModel> movies = moviesData
+            .map((movieData) => MovieModel.fromJson(movieData))
+            .toList();
+
+        return movies;
+      } else {
+        throw Exception('Failed to load upcoming movies');
+      }
+    } catch (e) {
+      throw Exception('Failed to connect to the API');
+    }
+  }
+}
+
+class UpcomingMovie extends StatefulWidget {
+  const UpcomingMovie({Key? key}) : super(key: key);
+
+  @override
+  _UpcomingMovieState createState() => _UpcomingMovieState();
+}
+
+class _UpcomingMovieState extends State<UpcomingMovie> {
+  final UpcomingMovieController _movieController = UpcomingMovieController();
+
+  late Future<List<MovieModel>> _movies;
+
+  @override
+  void initState() {
+    super.initState();
+    _movies = _movieController.getUpcomingMovie();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<MovieModel>>(
+      future: _movies,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Failed to load upcoming movies'),
+          );
+        } else if (snapshot.hasData) {
+          final List<MovieModel> movies = snapshot.data!;
+
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: movies
+                  .map(
+                    (movie) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => movie_detail(movie: movie),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              child: Image.network(
+                                movie.posterUrl,
+                                width: 200,
+                                height: 300,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                movie.title.length > 20
+                                    ? '${movie.title.substring(0, 20)}...'
+                                    : movie.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 8.0,
+                              ),
+                              child: Text(
+                                movie.releaseDate.substring(0, 4),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 8.0,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.thumb_up,
+                                    color: Colors.blue,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    movie.voteAverage.toString().substring(0, 3),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+}
