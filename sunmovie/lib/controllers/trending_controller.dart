@@ -381,8 +381,8 @@ class _Top10TvScreenState extends State<Top10TvScreen> {
 
 class UpcomingMovieController {
   Future<List<MovieModel>> getUpcomingMovie() async {
-    final apiKey = '2b106eac51c7ebba580862759524ba9f'; // Ganti dengan API key Anda dari TMDB
-    final url =
+    const apiKey = '2b106eac51c7ebba580862759524ba9f'; // Ganti dengan API key Anda dari TMDB
+    const url =
         'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey';
 
     try {
@@ -410,6 +410,7 @@ class UpcomingMovie extends StatefulWidget {
   const UpcomingMovie({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _UpcomingMovieState createState() => _UpcomingMovieState();
 }
 
@@ -430,11 +431,11 @@ class _UpcomingMovieState extends State<UpcomingMovie> {
       future: _movies,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
-          return Center(
+          return const Center(
             child: Text('Failed to load upcoming movies'),
           );
         } else if (snapshot.hasData) {
@@ -460,7 +461,7 @@ class _UpcomingMovieState extends State<UpcomingMovie> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius: const BorderRadius.all(Radius.circular(5)),
                               child: Image.network(
                                 movie.posterUrl,
                                 width: 200,
@@ -474,7 +475,7 @@ class _UpcomingMovieState extends State<UpcomingMovie> {
                                 movie.title.length > 20
                                     ? '${movie.title.substring(0, 20)}...'
                                     : movie.title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -488,7 +489,7 @@ class _UpcomingMovieState extends State<UpcomingMovie> {
                               ),
                               child: Text(
                                 movie.releaseDate.substring(0, 4),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.grey,
                                 ),
                               ),
@@ -501,14 +502,14 @@ class _UpcomingMovieState extends State<UpcomingMovie> {
                               ),
                               child: Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.thumb_up,
                                     color: Colors.blue,
                                   ),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Text(
                                     movie.voteAverage.toString().substring(0, 3),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                     ),
                                   ),
