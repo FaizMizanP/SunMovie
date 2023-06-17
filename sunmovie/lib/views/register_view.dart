@@ -1,64 +1,83 @@
 import 'package:flutter/material.dart';
-import 'package:sunmovie/views/login_view.dart';
+import 'package:sunmovie/controllers/user_controller.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+class RegisterScreen extends StatelessWidget {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final AuthController _authController = AuthController();
+
+  void _register(BuildContext context) async {
+    String? uid = await _authController.registerUser(
+        _emailController.text, _passwordController.text);
+    if (uid != null) {
+      // Registrasi berhasil, navigasi ke halaman berikutnya atau tampilkan pesan sukses
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Sukses'),
+            content: Text('Registrasi berhasil.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Tampilkan pesan error
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Registrasi gagal. Silakan coba lagi.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Daftar'),
+        title: Text('Register'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const TextField(
+          children: <Widget>[
+            TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
-            const SizedBox(height: 16.0),
-            const TextField(
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
-              obscureText: true,
             ),
-            const SizedBox(height: 16.0),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Re-Password',
-              ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 24.0),
+            SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                // Logika untuk tombol Daftar di sini
-              },
-              child: const Text('Daftar'),
-            ),
-            const SizedBox(height: 16.0),
-            GestureDetector(
-              onTap: () {
-                // Logika untuk tautan "sudah punya akun? login" di sini
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  )
-                );
-              },
-              child: const Text(
-                'Sudah punya akun? Login',
-                style: TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
+              child: Text('Register'),
+              onPressed: () => _register(context),
             ),
           ],
         ),

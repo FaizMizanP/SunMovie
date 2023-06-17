@@ -1,57 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:sunmovie/controllers/user_controller.dart';
 import 'package:sunmovie/views/register_view.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatelessWidget {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final AuthController _authController = AuthController();
+
+  void _login(BuildContext context) async {
+    String? uid = await _authController.loginUser(
+        _emailController.text, _passwordController.text);
+    if (uid != null) {
+      // Login berhasil, navigasi ke halaman berikutnya atau tampilkan pesan sukses
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Sukses'),
+            content: Text('Login berhasil.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Tampilkan pesan error atau navigasi ke halaman Register jika pengguna tidak memiliki akun
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Login gagal. Apakah Anda belum memiliki akun?'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterScreen()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text('Login'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const TextField(
+          children: <Widget>[
+            TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
-            const SizedBox(height: 16.0),
-            const TextField(
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
-              obscureText: true,
             ),
-            const SizedBox(height: 24.0),
+            SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                // Logika untuk tombol Login di sini
-              },
-              child: const Text('Login'),
-            ),
-            const SizedBox(height: 16.0),
-            GestureDetector(
-              onTap: () {
-                // Logika untuk tautan "belum punya akun? register" di sini
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterPage(),
-                  )
-                );
-              },
-              child: const Text(
-                'Belum punya akun? Register',
-                style: TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
+              child: Text('Login'),
+              onPressed: () => _login(context),
             ),
           ],
         ),
@@ -59,4 +90,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
